@@ -1,0 +1,27 @@
+.wrapper{
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.button{
+    border-radius: 5px;
+}
+
+.button-black{
+    color: black !important;
+    border-color: black !important;
+    width: 100px;
+    height: 50px;
+}
+
+.button-green{
+    color: #52C41A !important;
+    border-color: #52C41A !important;
+}
+
+.user-info{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}

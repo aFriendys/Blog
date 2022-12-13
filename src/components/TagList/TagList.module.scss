@@ -1,0 +1,33 @@
+.tagwrapper{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2px;
+
+    input{
+        border: 1px solid #D9D9D9;
+        border-radius: 4px;
+        padding: 8px 12px;
+    }
+
+    &__item{
+        display: flex;
+        gap: 20px;
+    }
+}
+
+.taglist{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    margin: 0px;
+}
+.button{
+    height: 40px !important;
+    padding: 8px 16px;
+}
+
+.buttonwrapper{
+    display: flex;
+    gap: 30px;
+}

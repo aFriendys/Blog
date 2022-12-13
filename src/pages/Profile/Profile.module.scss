@@ -1,0 +1,31 @@
+.section{
+    width: 384px;
+}
+
+.input-wrapper{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 8px;
+}
+
+.checkbox{
+    position: relative;
+    margin-top: 8px;
+    &:before{
+        content: '';
+        top: -8px;
+        position: absolute;
+        height: 1px;
+        width: 100%;
+        background-color: #E8E8E8;
+    }
+}
+
+.button-wrapper{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}

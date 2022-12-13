@@ -1,0 +1,18 @@
+.input{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 2px;
+
+    input{
+        border: 1px solid #D9D9D9;
+        border-radius: 4px;
+        padding: 8px 12px;
+    }
+}
+
+.error{
+    color: red;
+    font-size: 14px;
+    line-height: 22px;
+}
