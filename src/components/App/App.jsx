@@ -17,14 +17,14 @@ import LoggedOutHeader from '../LoggedOutHeader';
 // Api
 import api from '../../redux/serverApi';
 // Redux
-import { setIsAuthorized, setUserData } from '../../redux/serverSlice';
+import { setIsAuthorized, setUserData, setOffset } from '../../redux/serverSlice';
 
 import styles from './App.module.scss';
 
 function App() {
   const dispatch = useDispatch();
   const isAuthorized = useSelector((state) => state.serverSlice.isAuthorized);
-
+  dispatch(setOffset((localStorage.page - 1) * 5));
   const { data } = api.useGetCurrentUserQuery(localStorage.token);
 
   if (localStorage.token && data) {

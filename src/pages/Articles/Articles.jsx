@@ -16,10 +16,11 @@ function Articles() {
         <Pagination
           onChange={(value) => {
             dispatch(setOffset((value - 1) * 5));
+            localStorage.setItem('page', value);
             window.scrollTo(0, 0);
           }}
           disabled={!articlesCount}
-          defaultCurrent={1}
+          defaultCurrent={localStorage.page}
           total={(articlesCount && articlesCount - 5) || 25}
           defaultPageSize={5}
           size="small"
