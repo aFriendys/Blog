@@ -15,7 +15,7 @@ function Articles() {
       <footer className={styles.footer}>
         <Pagination
           onChange={(value) => {
-            dispatch(setOffset(value * 5));
+            dispatch(setOffset((value - 1) * 5));
             window.scrollTo(0, 0);
           }}
           disabled={!articlesCount}

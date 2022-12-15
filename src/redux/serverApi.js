@@ -2,6 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const api = createApi({
   reducerPath: 'serverApi',
+  tagTypes: ['Articles'],
   baseQuery: fetchBaseQuery({ baseUrl: 'https://blog.kata.academy/api/' }),
   endpoints: (builder) => ({
     getArticles: builder.query({
@@ -10,6 +11,10 @@ const api = createApi({
         params: { offset, limit: 5 },
         headers: { Authorization: token },
       }),
+      providesTags: ({ result }) =>
+        result
+          ? [...result.map(({ id }) => ({ type: 'Articles', id })), { type: 'Articles', id: 'LIST' }]
+          : [{ type: 'Articles', id: 'LIST' }],
     }),
     getCurrentUser: builder.query({
       query: (token) => ({ url: 'user', headers: { Authorization: token } }),
@@ -26,6 +31,7 @@ const api = createApi({
         headers: { Authorization: token },
         method: value === true ? 'POST' : 'DELETE',
       }),
+      invalidatesTags: [{ type: 'Articles', id: 'LIST' }],
     }),
     updateUser: builder.mutation({
       query: ({ token, body }) => ({
@@ -48,6 +54,7 @@ const api = createApi({
         method: 'POST',
         body,
       }),
+      invalidatesTags: [{ type: 'Articles', id: 'LIST' }],
     }),
     updateArticle: builder.mutation({
       query: ({ token, slug, body }) => ({
@@ -56,6 +63,7 @@ const api = createApi({
         body,
         method: 'PUT',
       }),
+      invalidatesTags: [{ type: 'Articles', id: 'LIST' }],
     }),
     deleteArticle: builder.mutation({
       query: ({ token, slug }) => ({
@@ -63,6 +71,7 @@ const api = createApi({
         headers: { Authorization: token },
         method: 'DELETE',
       }),
+      invalidatesTags: [{ type: 'Articles', id: 'LIST' }],
     }),
   }),
 });
