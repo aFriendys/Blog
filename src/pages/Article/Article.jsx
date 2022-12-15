@@ -75,7 +75,7 @@ function Article() {
             </div>
           )}
         </div>
-        <ReactMarkdown>{data?.article.body}</ReactMarkdown>
+        <ReactMarkdown className={styles.markdown}>{data?.article.body}</ReactMarkdown>
       </div>
     </section>
   );

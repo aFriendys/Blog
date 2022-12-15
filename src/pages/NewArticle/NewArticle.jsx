@@ -1,6 +1,6 @@
 import { Button } from 'antd';
 import { useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 
 import Form from '../../components/Form';
 import Input from '../../components/Input';
@@ -11,6 +11,7 @@ import api from '../../redux/serverApi';
 import styles from './NewArticle.module.scss';
 
 function NewArticle() {
+  const history = useHistory();
   const { slug } = useParams();
   let article;
   if (slug) {
@@ -37,6 +38,8 @@ function NewArticle() {
     await createArticle({
       body: { article: { ...data, tagList: data.tagList.map((item) => item.tagName) } },
       token: localStorage.token,
+    }).then(() => {
+      history.push('/');
     });
   };
 
@@ -47,6 +50,8 @@ function NewArticle() {
       slug,
       body: { article: { ...data, tagList: data.tagList.map((item) => item.tagName) } },
       token: localStorage.token,
+    }).then(() => {
+      history.push('/');
     });
   };
 
