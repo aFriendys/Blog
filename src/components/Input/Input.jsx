@@ -6,6 +6,7 @@ function Input({ placeholder, label, type, register, required, errors, minLength
     <div className={styles.input}>
       <label>{label}</label>
       <input
+        className={errors[name] && styles.inputError}
         type={type}
         placeholder={placeholder}
         {...register(name, {

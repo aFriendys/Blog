@@ -1,6 +1,7 @@
 import { Button } from 'antd';
 import { useForm } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
 
 import Form from '../../components/Form';
 import Input from '../../components/Input';
@@ -10,9 +11,10 @@ import { setUserData } from '../../redux/serverSlice';
 import styles from './Profile.module.scss';
 
 function Profile() {
+  const history = useHistory();
   const dispatch = useDispatch();
   const { username, email, image } = useSelector((state) => state.serverSlice.user);
-  const [updateUser] = api.useUpdateUserMutation();
+  const [updateUser, { isLoading }] = api.useUpdateUserMutation();
   const {
     register,
     handleSubmit,
@@ -37,6 +39,7 @@ function Profile() {
         const { token, ...user } = response.user;
         localStorage.setItem('token', `Token ${token}`);
         dispatch(setUserData(user));
+        history.push('/');
       })
       .catch((error) => {
         const { errors: errorData } = error.data;
@@ -90,7 +93,7 @@ function Profile() {
           />
         </div>
         <div className={styles['button-wrapper']}>
-          <Button type="primary" block size="large" htmlType="submit">
+          <Button type="primary" block size="large" htmlType="submit" loading={isLoading}>
             Save
           </Button>
         </div>

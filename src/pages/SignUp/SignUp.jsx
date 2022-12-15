@@ -10,7 +10,7 @@ import api from '../../redux/serverApi';
 import styles from './SignUp.module.scss';
 
 function SignUp() {
-  const [registerUser] = api.useRegisterUserMutation();
+  const [registerUser, { isLoading }] = api.useRegisterUserMutation();
   const history = useHistory();
   const {
     register,
@@ -86,7 +86,7 @@ function SignUp() {
         </div>
         <Checkbox className={styles.checkbox}>I agree to the processing of my personal information</Checkbox>
         <div className={styles['button-wrapper']}>
-          <Button type="primary" block size="large" htmlType="submit">
+          <Button type="primary" block size="large" htmlType="submit" loading={isLoading}>
             Create
           </Button>
           <span>

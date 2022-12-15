@@ -32,7 +32,7 @@ function NewArticle() {
     },
   });
 
-  const [createArticle] = api.useCreateArticleMutation();
+  const [createArticle, { isLoading: isLoadingCreate }] = api.useCreateArticleMutation();
   const handleCreateArticle = async (data) => {
     if (!data) return;
     await createArticle({
@@ -43,7 +43,7 @@ function NewArticle() {
     });
   };
 
-  const [updateArticle] = api.useUpdateArticleMutation();
+  const [updateArticle, { isLoading }] = api.useUpdateArticleMutation();
   const handleUpdateArticle = async (data) => {
     if (!data) return;
     await updateArticle({
@@ -90,10 +90,10 @@ function NewArticle() {
             minLength="6"
             maxLength="200"
           />
-          <TagList label="Tags" name="tagList" register={register} errors={errors} control={control} />
+          <TagList label="Tags" name="tagList" register={register} errors={errors} control={control} required />
         </div>
         <div className={styles['button-wrapper']}>
-          <Button type="primary" block size="large" htmlType="submit">
+          <Button type="primary" block size="large" htmlType="submit" loading={isLoading || isLoadingCreate}>
             Send
           </Button>
         </div>

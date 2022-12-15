@@ -6,6 +6,7 @@ function TextArea({ placeholder, label, register, required, errors, minLength, m
     <div className={styles.input}>
       <label>{label}</label>
       <textarea
+        className={errors[name] && styles.inputError}
         placeholder={placeholder}
         {...register(name, {
           required: { value: required, message: 'is required.' },

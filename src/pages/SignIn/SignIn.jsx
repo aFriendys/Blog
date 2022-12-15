@@ -14,7 +14,7 @@ import styles from './SignIn.module.scss';
 function SignIn() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const [authorizeUser] = api.useAuthorizeUserMutation();
+  const [authorizeUser, { isLoading }] = api.useAuthorizeUserMutation();
   const {
     register,
     handleSubmit,
@@ -69,7 +69,7 @@ function SignIn() {
           />
         </div>
         <div className={styles['button-wrapper']}>
-          <Button type="primary" block size="large" htmlType="submit">
+          <Button type="primary" block size="large" htmlType="submit" loading={isLoading}>
             Login
           </Button>
           <span>

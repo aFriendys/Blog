@@ -4,7 +4,7 @@ import { Button } from 'antd';
 
 import styles from './TagList.module.scss';
 
-function TagList({ label, register, errors, name, control }) {
+function TagList({ label, register, errors, name, control, required }) {
   const { fields, append, remove } = useFieldArray({ control, name });
   return (
     <div className={styles.tagwrapper}>
@@ -12,7 +12,10 @@ function TagList({ label, register, errors, name, control }) {
       <ul className={styles.taglist}>
         {fields.map((item, index) => (
           <li key={item.id} className={styles.tagwrapper__item}>
-            <input {...register(`${name}.${index}.tagName`)} />
+            <input
+              {...register(`${name}.${index}.tagName`, { required })}
+              className={errors[name]?.[index]?.tagName && styles.inputError}
+            />
             <div className={styles.buttonwrapper}>
               <Button className={styles.button} ghost danger onClick={() => remove(index)}>
                 Delete
@@ -33,7 +36,7 @@ function TagList({ label, register, errors, name, control }) {
           </Button>
         </div>
       )}
-      {errors[name] && <span className={styles.error}>{`${label} ${errors[name].message}`}</span>}
+      {errors[name] && <span className={styles.error}>Each tag must be at least 1 character</span>}
     </div>
   );
 }

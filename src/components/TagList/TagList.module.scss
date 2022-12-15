@@ -8,8 +8,19 @@
         border: 1px solid #D9D9D9;
         border-radius: 4px;
         padding: 8px 12px;
+        transition: 1s;
+        &:focus-visible{
+            outline: 1px solid #1890FF;
+        }
     }
 
+    .inputError{
+        outline: 1px solid red;
+        &:focus-visible{
+            outline: 1px solid red;
+        }
+    }
+    
     &__item{
         display: flex;
         gap: 20px;
@@ -30,4 +41,10 @@
 .buttonwrapper{
     display: flex;
     gap: 30px;
+}
+
+.error{
+    color: red;
+    font-size: 14px;
+    line-height: 22px;
 }
