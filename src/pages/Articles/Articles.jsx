@@ -21,7 +21,7 @@ function Articles() {
           }}
           disabled={!articlesCount}
           defaultCurrent={localStorage.page}
-          total={(articlesCount && articlesCount - 5) || 25}
+          total={(articlesCount && articlesCount - 5) || 10000}
           defaultPageSize={5}
           size="small"
           showSizeChanger={false}
