@@ -2,7 +2,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
 const api = createApi({
   reducerPath: 'serverApi',
-  tagTypes: ['Articles'],
+  tagTypes: ['Articles', 'Article'],
   baseQuery: fetchBaseQuery({ baseUrl: 'https://blog.kata.academy/api/' }),
   endpoints: (builder) => ({
     getArticles: builder.query({
@@ -46,6 +46,10 @@ const api = createApi({
         url: `articles/${slug}`,
         headers: { Authorization: token },
       }),
+      providesTags: ({ result }) =>
+        result
+          ? [...result.map(({ id }) => ({ type: 'Article', id })), { type: 'Article', id: 'ONE' }]
+          : [{ type: 'Article', id: 'ONE' }],
     }),
     createArticle: builder.mutation({
       query: ({ token, body }) => ({
@@ -63,7 +67,10 @@ const api = createApi({
         body,
         method: 'PUT',
       }),
-      invalidatesTags: [{ type: 'Articles', id: 'LIST' }],
+      invalidatesTags: [
+        { type: 'Article', id: 'ONE' },
+        { type: 'Articles', id: 'LIST' },
+      ],
     }),
     deleteArticle: builder.mutation({
       query: ({ token, slug }) => ({
