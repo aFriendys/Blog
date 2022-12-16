@@ -31,7 +31,7 @@ function NewArticle() {
       tagList: article?.article.tagList.map((tag) => ({ tagName: tag })),
     },
   });
-
+  console.log(errors);
   const [createArticle, { isLoading: isLoadingCreate }] = api.useCreateArticleMutation();
   const handleCreateArticle = async (data) => {
     if (!data) return;

@@ -5,7 +5,11 @@ import { Button } from 'antd';
 import styles from './TagList.module.scss';
 
 function TagList({ label, register, errors, name, control, required }) {
-  const { fields, append, remove } = useFieldArray({ control, name });
+  const { fields, append, remove } = useFieldArray({
+    control,
+    name,
+    rules: { required: { value: true, message: 'You must add at least 1 tag' } },
+  });
   return (
     <div className={styles.tagwrapper}>
       <label>{label}</label>
@@ -36,7 +40,13 @@ function TagList({ label, register, errors, name, control, required }) {
           </Button>
         </div>
       )}
-      {errors[name] && <span className={styles.error}>Each tag must be at least 1 character</span>}
+      {errors[name] && (
+        <span className={styles.error}>
+          {errors[name].root?.type === 'required'
+            ? errors[name].root?.message
+            : 'Each tag must be at least 1 character'}
+        </span>
+      )}
     </div>
   );
 }
