@@ -58,7 +58,7 @@ function NewArticle() {
   const onSubmit = (data) => (slug ? handleUpdateArticle(data) : handleCreateArticle(data));
   return (
     <section className={styles.section}>
-      <Form title="Create new article" onSubmit={handleSubmit(onSubmit)}>
+      <Form title={slug ? 'Edit article' : 'Create new article'} onSubmit={handleSubmit(onSubmit)}>
         <div className={styles['input-wrapper']}>
           <Input
             placeholder="Title"
